@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Movies</title>
+</head>
+<body>
+  <!-- Accueil Section --> 
+  <div class="hero-section">
+     <!-- header Section -->
+    <header>
+      <a class="logo" href="home.html">
+        🎬EmyMovies
+      </a>
+        <div class="col">
+        <form class="search-input" id="search-input">
+            <input 
+              class="form-control search-input" 
+              type="search" 
+              placeholder="Search your movies ..." 
+              id="searchInput"
+            >
+        </form>
+      </div>
+      <a class="watchlist-btn" href="watchList.html">
+         <i class="bi bi-bookmark"></i>Watchlist
+      </a>
+    </header>
+     <!-- display from api Section -->
+     <div class="searchMovies">
+      <div class="imgMovie">
+        <img src="" alt="">
+      </div>
+      <div class="img-info">
+        <h3 id="img-title"></h3>
+        <span id="img-date"></span>
+        <p id="img-overview"></p>
+      </div>
+     </div>
+     
+    <div class="hero-content">
+      <p>Discover Movies & Series You’ll Love</p>
+      <h5>Explore trending, popular, and newly released movies all in one place</h5>
+    </div>
+    
+  </div>
+
+<!-- Trending Section --> 
+<div class="trending-section">
+  
+    <h2>Trending Now</h2>
+  
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <!-- Carte 1 -->
+     <div class="card">
+      <div class="card-image">
+        <img src="stranger-things.jpg" alt="Stranger Things" onclick="window.location.href='details.html'">
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Stranger Things</a>
+      </div>
+    </div>
+
+      <!-- Carte 2 -->
+    <div class="card">
+      <div class="card-image">
+        <img src="peaple we meet on vacation.webp" alt="People we meet on vacation">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">People we meet on vacation</a>
+      </div>
+    </div>
+
+      
+      <!-- Carte 3 -->
+     <div class="card">
+      <div class="card-image">
+        <img src="can-this-love-be-translated.webp" alt="Can this love be Translated">
+
+      </div>
+      <div class="card-content">
+          <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+
+      <!-- Carte 4 -->
+    <div class="card">
+      <div class="card-image">
+        <img src="wednesday.jpg" alt="Wednesday Season 3">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Wednesday Season 3</a>
+      </div>
+    </div>
+      <!-- Carte 5 -->
+     <div class="card">
+      <div class="card-image">
+        <img src="dynamite-kiss-.jpg" alt="Dynamite Kiss">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Dynamite Kiss</a>
+      </div>
+    </div>
+
+           <!-- Carte 5 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger-things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+     <!-- Carte 6 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+     <!-- Carte 7 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+     <!-- Carte 8 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+
+
+    </div>
+  </div>
+</div>
+<!-- Popular Section --> 
+<div class="popular-section">
+  
+    <h2>Popular Movies</h2>
+  
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <!-- Carte 1 -->
+     <div class="card">
+      <div class="card-image">
+        <img src="squid game.jpg" alt="Squid Game">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Squid Game</a>
+      </div>
+    </div>
+
+      <!-- Carte 2 -->
+    <div class="card">
+      <div class="card-image">
+        <img src="bon apetit your majesty.webp" alt="Bon Apetit Your Majestry ">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Bon Apetit Your Majestry</a>
+      </div>
+    </div>
+
+      
+      <!-- Carte 3 -->
+     <div class="card">
+      <div class="card-image">
+        <img src="when-life-gives-you-tangerines.png" alt="When Life Give You Tangerines">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">When Life Give You Tangerines</a>
+      </div>
+    </div>
+
+      <!-- Carte 4 -->
+    <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Title</a>
+      </div>
+    </div>
+      <!-- Carte 5 -->
+     <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Title</a>
+      </div>
+    </div>
+
+           <!-- Carte 5 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Title</a>
+      </div>
+    </div>
+     <!-- Carte 6 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Title</a>
+      </div>
+    </div>
+     <!-- Carte 7 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Title</a>
+        
+      </div>
+    </div>
+     <!-- Carte 8 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Title</a>
+      </div>
+    </div>
+
+
+    </div>
+  </div>
+</div>
+<!-- Coming Soon Section --> 
+<div class="ComingSoon-section">
+  
+    <h2>Coming Soon</h2>
+  
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <!-- Carte 1 -->
+     <div class="card">
+      <div class="card-image">
+        <img src="avatar4.webp" alt="Avatar 4">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Avatar 4</a>
+      </div>
+    </div>
+
+      <!-- Carte 2 -->
+    <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+
+      
+      <!-- Carte 3 -->
+     <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+
+      <!-- Carte 4 -->
+    <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+         <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+      <!-- Carte 5 -->
+     <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+        <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+
+           <!-- Carte 5 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+       <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+     <!-- Carte 6 -->
+  <div class="card">
+      <div class="card-image">
+        <img src="stranger things.jpg" alt="T DU FAUX">
+
+      </div>
+      <div class="card-content">
+       <a href="details.html"  class="card-title">Can this love be Translated</a>
+      </div>
+    </div>
+ 
+
+    </div>
+  </div>
+</div>
+ 
+<!-- FAQ Section --> 
+<div class="faq-container">
+  <h1 class="faq-title">Frequently Asked Questions</h1>
+  
+  <div class="faq-item">
+    <div class="faq-question">What is Emey Movies?</div>
+    <div class="faq-answer">
+      Emey Movies is a movie discovery platform that allows users to explore trending, popular, and newly released movies. 
+      The website helps users search for movies, view detailed information, and build a personal list of favorite titles.
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">How does the movie search work?</div>
+    <div class="faq-answer">
+      The search feature allows users to find movies by title. Results are fetched in real time using a public movie API and displayed with posters, ratings, and release dates.
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">Do I need an account to use the website?</div>
+    <div class="faq-answer">
+      No account is required. Emey Movies is designed to be accessible without sign-up. Users can browse movies and add favorites without creating a profile.
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">How are favorite movies saved?</div>
+    <div class="faq-answer">
+      Favorite movies are saved locally in your browser using local storage. This means your favorites remain available on the same device without the need for an account or login.
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">What technologies are used to build this website?</div>
+    <div class="faq-answer">
+      Emey Movies is built using HTML, CSS, Bootstrap, and JavaScript. Movie data is retrieved from an external movie database API to ensure up-to-date content.
+    </div>
+  </div>
+</div>
+
+
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Emey Movies</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Investor Relations</a></li>
+                    <li><a href="#">Legal Notices</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Help Center</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Account & Billing</a></li>
+                    <li><a href="#">Plans & Pricing</a></li>
+                    <li><a href="#">Supported Devices</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                    <li><a href="#faq">FAQs</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Community</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Emey Movies Forums</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">Redeem Gift Cards</a></li>
+                    <li><a href="#">Buy Gift Cards</a></li>
+                    <li><a href="#">Ways to Watch</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <p style="margin-top: 20px; color: var(--gray); font-size: 14px;">
+                    <i class="fas fa-globe"></i>
+                    English <i class="fas fa-caret-down"></i>
+                </p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2024 Emey Movies. All rights reserved.</p>
+            <p style="margin-top: 10px;">
+                <a href="#">Privacy</a> • 
+                <a href="#">Terms of Use</a> • 
+                <a href="#">Cookie Preferences</a> • 
+                <a href="#">Corporate Information</a>
+            </p>
+        </div>
+    </footer>
+<script src="FAQ.js"></script>
+<script src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

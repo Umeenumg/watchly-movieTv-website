@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>details</title>
+  <link rel="stylesheet" href="style.css">
+    <link href="./output.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+</head>
+<body>
+    <!-- header Section -->
+    <header>
+      <a class="logo" href="home.html">
+        🎬EmyMovies
+      </a>
+        <div class="col">
+        <form class="search-box" id="searchForm">
+            <input 
+              class="form-control search-input" 
+              type="search" 
+              placeholder="Search your movies ..." 
+              id="searchInput"
+            >
+        </form>
+      </div>
+      <a class="watchlist-btn" href="watchList.html">
+         <i class="bi bi-bookmark"></i>Watchlist
+      </a>
+    </header>
+
+
+<section class="details-hero">
+  <div class="overlay">
+    <div class="container">
+      <div class="poster">
+
+        <!-- Poster -->
+        <div class="poster-img">
+          <img src="can this.webp" class="poster-img" alt="Movie Poster">
+        </div>
+
+        <!-- Info -->
+        <div class="poster-info">
+
+          <h1 class="movie-title">
+            Can this love be translated?
+            <span class="year">2026</span>
+          </h1>
+
+          <div class="meta">
+            <span class="badge bg-secondary">Drama</span>
+            <span class="badge bg-secondary">Romance</span>
+            <span class="age">15+</span>
+          </div>
+
+          <!-- Rating -->
+          <div class="rating interactive">
+  <div class="stars-container">
+    <div class="stars" data-rating="0">
+      <span class="star" data-value="1">☆</span>
+      <span class="star" data-value="2">☆</span>
+      <span class="star" data-value="3">☆</span>
+      <span class="star" data-value="4">☆</span>
+      <span class="star" data-value="5">☆</span>
+    </div>
+    <div class="rating-value">Rate this</div>
+  </div>
+</div>
+
+          <!-- Action Icons -->
+          <div class="actions">
+            <button class="icon-btn">
+              <i class="bi bi-heart"></i>
+            </button>
+
+            <button class="icon-btn">
+              <i class="bi bi-bookmark"></i>
+            </button>
+          </div>
+
+          <p class="tagline">The most difficult language, yours.</p>
+
+          <h4>overview</h4>
+          <p class="overview">
+            Pas facile de se comprendre pour une célébrité et son interprète
+            alors qu'ils parcourent le monde pour une émission de télévision.
+          </p>
+
+          <!-- Creators -->
+          <div class="creators-list">
+            <div>
+              <strong>Hong Mi-ran</strong>
+              <p>Creator</p>
+            </div>
+            <div>
+              <strong>Hong Jeong-eun</strong>
+              <p>Creator</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <script src="FAQ.js"></script>
+</body>
+</html>
