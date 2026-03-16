@@ -1,0 +1,186 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--a:#570c31;--a2:#8b1548;--a3:#3d0820;--glow:rgba(87,12,49,.6)}
+@keyframes f1{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(-4deg)}}
+@keyframes f2{0%,100%{transform:translateY(0) rotate(5deg)}50%{transform:translateY(-18px) rotate(7deg)}}
+@keyframes f3{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(-1deg)}}
+@keyframes f4{0%,100%{transform:translateY(0) rotate(9deg)}50%{transform:translateY(-16px) rotate(7deg)}}
+@keyframes f5{0%,100%{transform:translateY(0) rotate(-11deg)}50%{transform:translateY(-12px) rotate(-9deg)}}
+@keyframes f6{0%,100%{transform:translateY(0) rotate(4deg)}50%{transform:translateY(-20px) rotate(6deg)}}
+@keyframes f7{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-10px) rotate(-5deg)}}
+@keyframes f8{0%,100%{transform:translateY(0) rotate(13deg)}50%{transform:translateY(-14px) rotate(11deg)}}
+@keyframes orb{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.65;transform:scale(1.12)}}
+@keyframes orb2{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.5;transform:scale(1.18)}}
+@keyframes titleIn{from{opacity:0;letter-spacing:16px}to{opacity:1;letter-spacing:-2px}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimBtn{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes spin1{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes spin2{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 6px var(--a),0 0 12px var(--a);opacity:1}50%{box-shadow:0 0 3px var(--a);opacity:.6}}
+@keyframes glitch{0%,92%,100%{clip-path:none;transform:none}93%{clip-path:polygon(0 10%,100% 10%,100% 30%,0 30%);transform:translateX(-4px)}95%{clip-path:polygon(0 60%,100% 60%,100% 78%,0 78%);transform:translateX(4px)}97%{clip-path:none;transform:translateX(-1px)}}
+@keyframes lineGlow{0%,100%{opacity:.5}50%{opacity:1}}
+
+.hero{position:relative;width:100%;height:460px;overflow:hidden;background:#04000a}
+
+.stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:14px;padding:30px 24px}
+
+.p{position:relative;border-radius:10px;overflow:hidden;flex-shrink:0;cursor:pointer}
+.p img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease,filter .4s ease}
+.p:hover img{transform:scale(1.06);filter:brightness(1.15)}
+.pov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.1) 45%,transparent 70%)}
+.shine{position:absolute;top:0;left:-130%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);transform:skewX(-18deg);transition:left .5s ease;pointer-events:none}
+.p:hover .shine{left:170%}
+.p:hover{box-shadow:0 0 35px var(--glow),0 0 70px rgba(87,12,49,.25) !important}
+
+.p1{width:92px;height:138px;animation:f1 5.2s ease-in-out infinite;box-shadow:0 22px 55px rgba(0,0,0,.85),0 0 18px rgba(87,12,49,.15)}
+.p2{width:104px;height:156px;animation:f2 6.1s ease-in-out infinite;box-shadow:0 26px 60px rgba(0,0,0,.88)}
+.p3{width:86px;height:130px;animation:f3 7.3s ease-in-out infinite;box-shadow:0 20px 48px rgba(0,0,0,.82)}
+.p4{width:120px;height:178px;animation:f4 5.6s ease-in-out infinite;box-shadow:0 30px 70px rgba(0,0,0,.92),0 0 35px rgba(87,12,49,.3);z-index:2}
+.p5{width:98px;height:148px;animation:f5 6.8s ease-in-out infinite;box-shadow:0 24px 56px rgba(0,0,0,.86)}
+.p6{width:90px;height:136px;animation:f6 4.9s ease-in-out infinite;box-shadow:0 22px 52px rgba(0,0,0,.84)}
+.p7{width:106px;height:160px;animation:f7 7.5s ease-in-out infinite;box-shadow:0 28px 62px rgba(0,0,0,.87)}
+.p8{width:84px;height:126px;animation:f8 5.9s ease-in-out infinite;box-shadow:0 20px 46px rgba(0,0,0,.82)}
+
+.o1{position:absolute;width:580px;height:580px;border-radius:50%;background:radial-gradient(circle,rgba(87,12,49,.42),transparent 70%);top:50%;left:16%;transform:translate(-50%,-50%);animation:orb 5.5s ease-in-out infinite;pointer-events:none}
+.o2{position:absolute;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(139,21,72,.28),transparent 70%);top:38%;left:80%;transform:translate(-50%,-50%);animation:orb2 7.8s ease-in-out infinite 1.2s;pointer-events:none}
+.o3{position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(61,8,32,.38),transparent 70%);top:78%;left:52%;transform:translate(-50%,-50%);animation:orb 9.2s ease-in-out infinite 2.4s;pointer-events:none}
+
+.rings{position:absolute;top:50%;left:50%;pointer-events:none}
+.r{position:absolute;border-radius:50%;transform:translate(-50%,-50%)}
+.r1{width:640px;height:640px;border:1px solid rgba(87,12,49,.18);animation:spin1 24s linear infinite}
+.r2{width:470px;height:470px;border:1px dashed rgba(139,21,72,.12);animation:spin2 16s linear infinite}
+.r3{width:310px;height:310px;border:1px solid rgba(255,255,255,.05);animation:spin1 34s linear infinite}
+
+.vig{position:absolute;inset:0;background:radial-gradient(ellipse 88% 72% at 50% 50%,transparent 22%,rgba(0,0,0,.5) 58%,rgba(0,0,0,.97) 100%);pointer-events:none}
+.ft{position:absolute;top:0;left:0;right:0;height:140px;background:linear-gradient(to bottom,rgba(4,0,10,.95),transparent);pointer-events:none}
+.fb{position:absolute;bottom:0;left:0;right:0;height:140px;background:linear-gradient(to top,rgba(4,0,10,.98),transparent);pointer-events:none}
+
+.ctl{position:absolute;top:20px;left:20px;width:28px;height:28px;border-top:2px solid var(--a);border-left:2px solid var(--a)}
+.ctr{position:absolute;top:20px;right:20px;width:28px;height:28px;border-top:2px solid var(--a);border-right:2px solid var(--a)}
+.cbl{position:absolute;bottom:20px;left:20px;width:28px;height:28px;border-bottom:2px solid var(--a);border-left:2px solid var(--a)}
+.cbr{position:absolute;bottom:20px;right:20px;width:28px;height:28px;border-bottom:2px solid var(--a);border-right:2px solid var(--a)}
+
+.tl{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--a) 30%,var(--a2) 50%,var(--a) 70%,transparent);pointer-events:none}
+.bl{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--a3) 30%,var(--a) 50%,var(--a2) 70%,transparent);pointer-events:none}
+
+.cnt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:10;padding:0 30px;pointer-events:none}
+
+.badge{display:inline-flex;align-items:center;gap:9px;background:rgba(87,12,49,.18);border:1px solid rgba(87,12,49,.55);border-radius:20px;padding:5px 18px;margin-bottom:20px;animation:fadeUp .7s ease both;pointer-events:auto}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--a2);animation:dotPulse 2s ease-in-out infinite;flex-shrink:0}
+.bs{font-size:9px;font-weight:700;letter-spacing:3px;color:#c06880;font-family:sans-serif;text-transform:uppercase}
+.bsep{width:1px;height:11px;background:rgba(192,96,128,.3)}
+
+.ttl{font-size:52px;font-weight:900;line-height:.93;letter-spacing:-2px;animation:titleIn 1s ease both;margin-bottom:8px;font-family:Georgia,serif}
+.tw{color:#f5eff2;text-shadow:0 2px 40px rgba(0,0,0,.95)}
+.ta{background:linear-gradient(90deg,#d4708a,var(--a2),#570c31);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.glitch{animation:glitch 9s ease-in-out infinite}
+
+.drow{display:flex;align-items:center;gap:14px;margin:16px 0;animation:fadeUp .7s ease .15s both}
+.dl{height:1px;width:95px;background:linear-gradient(90deg,transparent,var(--a),transparent);animation:lineGlow 3.2s ease-in-out infinite}
+.diam{width:7px;height:7px;background:var(--a2);transform:rotate(45deg);flex-shrink:0}
+
+.sub{font-size:11px;color:rgba(255,255,255,.42);letter-spacing:3px;font-family:sans-serif;text-transform:uppercase;animation:fadeUp .7s ease .25s both;margin-bottom:28px}
+
+.btns{display:flex;gap:14px;align-items:center;animation:fadeUp .7s ease .35s both;margin-bottom:24px;pointer-events:auto}
+.bp{position:relative;padding:14px 40px;border-radius:3px;font-size:11px;font-weight:800;letter-spacing:3px;color:#f8e8ee;font-family:sans-serif;text-transform:uppercase;cursor:pointer;overflow:hidden;background:linear-gradient(90deg,var(--a),var(--a2),var(--a));background-size:200% 100%;box-shadow:0 0 30px rgba(87,12,49,.65),0 0 60px rgba(87,12,49,.3);animation:shimBtn 3s linear infinite}
+.bg{padding:14px 32px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,.68);font-family:sans-serif;text-transform:uppercase;cursor:pointer;border:1px solid rgba(87,12,49,.5);background:rgba(87,12,49,.1)}
+
+.stats{display:flex;gap:30px;animation:fadeUp .7s ease .45s both;pointer-events:auto}
+.stat{display:flex;flex-direction:column;align-items:center;gap:3px}
+.sn{font-size:20px;font-weight:900;color:#f0dde4;letter-spacing:-1px;line-height:1;font-family:sans-serif}
+.sl{font-size:8px;color:rgba(255,255,255,.28);letter-spacing:2.5px;font-family:sans-serif;text-transform:uppercase}
+.sd{width:1px;height:34px;background:rgba(87,12,49,.4)}
+</style>
+
+<div class="hero">
+  <div class="tl"></div>
+
+  <div class="stage">
+    <div class="p p1">
+      <img src="http://www.impawards.com/2025/posters/sinners_xlg.jpg" alt="Sinners"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#3d0c08,#1a0400)'">
+      <div class="pov"></div><div class="shine"></div>
+    </div>
+    <div class="p p2">
+      <img src="http://www.impawards.com/2025/posters/war_machine_xlg.jpg" alt="War Machine"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#1a2a4a,#040d18)'">
+      <div class="pov"></div><div class="shine"></div>
+    </div>
+    <div class="p p3">
+      <img src="http://www.impawards.com/2025/posters/shelter_xlg.jpg" alt="Shelter"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#1c2233,#06080e)'">
+      <div class="pov"></div><div class="shine"></div>
+    </div>
+    <div class="p p4">
+      <img src="http://www.impawards.com/intl/uk/2025/posters/hamnet_xlg.jpg" alt="Hamnet"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#2a1e0a,#080604)'">
+      <div class="pov"></div><div class="shine"></div>
+    </div>
+    <div class="p p5">
+      <img src="http://www.impawards.com/2025/posters/zootopia_two_xlg.jpg" alt="Zootopia 2"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#3a1a38,#0d050c)'">
+      <div class="pov"></div><div class="shine"></div>
+    </div>
+    <div class="p p6">
+      <img src="http://www.impawards.com/2025/posters/the_bluff_xlg.jpg" alt="The Bluff"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#143020,#04100a)'">
+      <div class="pov"></div><div class="shine"></div>
+    </div>
+    <div class="p p7">
+      <img src="http://www.impawards.com/2025/posters/moana_two_xlg.jpg" alt="Moana 2"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#083060,#020810)'">
+      <div class="pov"></div><div class="shine"></div>
+    </div>
+    <div class="p p8">
+      <img src="http://www.impawards.com/2024/posters/one_piece_xlg.jpg" alt="One Piece"
+           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#0d3320,#020a05)'">
+      <div class="pov"></div><div class="shine"></div>
+    </div>
+  </div>
+
+  <div class="o1"></div><div class="o2"></div><div class="o3"></div>
+  <div class="rings"><div class="r r1"></div><div class="r r2"></div><div class="r r3"></div></div>
+  <div class="vig"></div><div class="ft"></div><div class="fb"></div>
+  <div class="ctl"></div><div class="ctr"></div><div class="cbl"></div><div class="cbr"></div>
+
+  <div class="cnt">
+    <div class="badge">
+      <div class="dot"></div>
+      <span class="bs">Now Streaming</span>
+      <div class="bsep"></div>
+      <span class="bs">10,000+ Titles</span>
+    </div>
+
+    <div class="ttl glitch">
+      <div class="tw">Discover Movies</div>
+      <div class="ta">&amp; Series</div>
+      <div class="tw">You'll Love</div>
+    </div>
+
+    <div class="drow">
+      <div class="dl"></div>
+      <div class="diam"></div>
+      <div class="dl"></div>
+    </div>
+
+    <div class="sub">Trending · Popular · Newly Released · All in one place</div>
+
+    <div class="btns">
+      <div class="bp">&#9654;&nbsp; Explore Now</div>
+      <div class="bg">+ Watchlist</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="sn">10K+</span><span class="sl">Titles</span></div>
+      <div class="sd"></div>
+      <div class="stat"><span class="sn">4K</span><span class="sl">Quality</span></div>
+      <div class="sd"></div>
+      <div class="stat"><span class="sn">Daily</span><span class="sl">Updates</span></div>
+      <div class="sd"></div>
+      <div class="stat"><span class="sn">Free</span><span class="sl">Browse</span></div>
+    </div>
+  </div>
+
+  <div class="bl"></div>
+</div>

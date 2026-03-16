@@ -7,39 +7,76 @@
     
 
     <!-- Bootstrap -->
-  <title>display</title>
+  <title>displaySerch</title>
+  <script src="display.js"></script>
 </head>
 <body>
-    <!-- header Section -->
-    <header>
-      <a class="logo" href="home.html">
-        🎬EmyMovies
-      </a>
-        <div class="col">
-        <form class="search-input" id="search-input">
-            <input 
-              class="form-control search-input" 
-              type="search" 
-              placeholder="Search your movies ..." 
-              id="searchInput"
-            >
-        </form>
-      </div>
-      <a class="watchlist-btn" href="watchList.html">
-         <i class="bi bi-bookmark"></i>Watchlist
-      </a>
-    </header>
+       <!-- Header Section -->
+<header>
+  <div class="header-container">
+    <!-- Logo -->
+    <a class="logo" href="home.html">
+      <span class="logo-icon">🎬</span>
+      <span class="logo-text">EmyMovies</span>
+    </a>
+
+    <!-- Search Bar -->
+    <div class="search-wrapper">
+      <i class="bi bi-search search-icon"></i>
+      <input
+        class="search-input"
+        type="search"
+        placeholder="Search for movies, series..."
+        id="searchInput"
+      >
+    </div>
+
+    <!-- Watchlist Button -->
+    <a class="watchlist-link" href="watchList.html">
+      <i class="bi bi-bookmark-fill"></i>
+      <span class="watchlist-text">Watchlist</span>
+    </a>
+
+    <!-- Mobile Menu Button (hidden on desktop) -->
+    <button class="mobile-menu-btn" aria-label="Menu">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+</header>
+
+
+   <!-- display search results Section -->
+  <div id="searchResults" class="search-results-grid"></div>
+
+
+
+
+
+
+   
      <!-- display from api Section -->
-     <div class="searchMovies">
-      <div class="imgMovie">
-        <img src="" alt="">
-      </div>
-      <div class="img-info">
-        <h3 id="img-title"></h3>
-        <span id="img-date"></span>
-        <p id="img-overview"></p>
-      </div>
-     </div>
+     <div class="searchContainer">
+        <!-- Poster -->
+        <div class="posterSearch-img">
+          <img  src="can this.webp" class="posterSearchImg" alt="Movie Poster">
+        </div>
+
+        <!-- Info -->
+        <div class="posterSearch-info">
+
+          <h1 class="posterSearch-title">
+            Can this love be translated?
+          </h1>
+          <span class="posterSearch-date">2026</span>
+          <h1 class="posterSearch-overview">
+           After cracking the biggest case in Zootopia's history, rookie cops Judy Hopps and Nick Wilde find themselves on the twisting trail of a great mystery when Gary De'Snake arrives and turns the animal metropolis upside down. To crack
+          </h1>
+
+
+        </div>
+
+      
+    </div>
   
 </body>
 </html>
