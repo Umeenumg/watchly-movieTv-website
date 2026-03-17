@@ -3,48 +3,22 @@
 
 
 // function  to fetch (search ) movie/tv show  details from API
- const getMovieDetails = async (query) => {
-   
-   
-    const url = `https://api.themoviedb.org/3/search/multi?api_key=${myAPIKey}&query=${query} `;
-    try{
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      const query = searchInput.value.trim();
+
+      if (query !== "") {
+        window.location.href = `display.html?query=${encodeURIComponent(query)}`;
       }
-      const data = await response.json();
-      showDataResults(data);
     }
-    catch (error)
-    {
-      console.error("There has been a problem with your fetch operation:", error);
-    }
-  }
-
-
-// add event listener to search press enter key
-const searchInput = document.getElementById("searchInput"); 
-  
-searchInput.addEventListener("keydown", (e) => {
-  e.preventDefault();
-  if (e.key === "Enter") {
-    const query = searchInput.value.trim();
-    if (query !== '') {
-      console.log(`Searching for: ${query}`);
-      getMovieDetails(query);
-    }
-
-  }
-})
-  
-
-//  function to show movie data on screen
-const showDataResults = (data) => {
-  console.log(data);
+  });
 }
-
-
-
+  
 
 // trnding movies and tv shows carousel
 
