@@ -1671,3 +1671,116 @@ h5 {
   font-size: 0.9rem;
   color: #bbb;
 }
+/* person section */
+.person-hero {
+  position: relative;
+  min-height: 80vh;
+  padding: 120px 80px 60px;
+  background: black;
+  color: white;
+}
+
+.person-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.6));
+}
+
+.person-container {
+  position: relative;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+#person-img {
+  width: 280px;
+  border-radius: 20px;
+}
+
+.person-info {
+  max-width: 700px;
+}
+
+.person-info h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.person-info p {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.known-section {
+  padding: 50px 80px;
+  color: white;
+}
+
+.known-section h2 {
+  margin-bottom: 20px;
+}
+/* upgrade */
+.details-hero,
+.person-hero {
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.details-hero::before,
+.person-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.95),
+    rgba(0,0,0,0.5)
+  );
+}
+body {
+  background: radial-gradient(circle at top, #0f0f1a, #050508);
+  color: white;
+}
+
+/* glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+}
+/* movie card  */
+.movie-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.movie-card:hover img {
+  transform: scale(1.1);
+}
+
+.movie-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, black, transparent);
+}
+
+.movie-card-content {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 2;
+}
