@@ -35,7 +35,7 @@
     </div>
 
     <!-- Watchlist Button -->
-    <a class="watchlist-link" href="watchList.html">
+    <a class="watchlist-link" href="watchlist.html">
       <i class="bi bi-bookmark-fill"></i>
       <span class="watchlist-text">Watchlist</span>
     </a>
@@ -48,34 +48,46 @@
 </header>
 
 <section class="details-hero">
-  <div class="container">
-    <div class="poster">
-      <div class="poster-img">
-        <img id="detailsPoster" src="" alt="Movie Poster" class="poster-img">
+  <div class="details-overlay"></div>
+
+  <div class="details-container">
+    <div class="details-poster">
+      <img id="details-poster" src="" alt="">
+    </div>
+
+    <div class="details-content">
+      <h1 id="details-title">ONE PIECE</h1>
+
+      <div class="details-meta-top">
+        <span id="details-year">2023</span>
       </div>
 
-      <div class="poster-info">
-        <h1 class="movie-title" id="detailsTitle">Title</h1>
-        <span class="year" id="detailsYear">2026</span>
+      <div id="details-genres" class="genre-list"></div>
+      <button id="watchlist-btn" class="watchlist-btn">
+        <i class="bi bi-bookmark-fill"></i>
+       Add to Watchlist
+      </button>
 
-        <div class="meta" id="detailsGenres"></div>
+      <div class="details-info-grid"></div>
 
-        <div class="meta-details">
-          <p><strong>Type:</strong> <span id="detailsType"></span></p>
-          <p><strong>Language:</strong> <span id="detailsLanguage"></span></p>
-          <p><strong>Rating:</strong> <span id="detailsRating"></span></p>
-          <p><strong>Status:</strong> <span id="detailsStatus"></span></p>
-          <p><strong>Extra:</strong> <span id="detailsExtra"></span></p>
-        </div>
-
-        <p class="tagline" id="detailsTagline"></p>
-
-        <h4>Overview</h4>
-        <p class="overview" id="detailsOverview"></p>
+      <div class="overview-box">
+        <h2>Overview</h2>
+        <p id="details-overview"></p>
       </div>
     </div>
   </div>
 </section>
+<section class="recommended-section">
+  <h2>Recommended for you</h2>
+  <div id="recommended-list" class="similar-grid"></div>
+</section>
+
+<section class="similar-section">
+  <h2>You may also like</h2>
+  <div id="similar-list" class="similar-grid"></div>
+</section>
+
+
 
 
 
