@@ -37,10 +37,11 @@ async function fetchDetails() {
     watchlistBtn.addEventListener("click", () => {
       toggleWatchlist(data, type);
     });
-  
+  fetchCast(id, type);
   // important to save to history after rendering details, so we have the title and genres for better recommendations
   saveToHistory(data, type);
   fetchRecommended();
+  
 } catch (error) {
     console.error("Error fetching details:", error);
     showError();
@@ -434,4 +435,46 @@ function toggleWatchlist(data, type) {
 
   saveWatchlist(list);
   updateWatchlistButton(data, type);
+}
+/* *************************************** fetch cast details***************************/
+const castListEl = document.getElementById("cast-list");
+
+async function fetchCast(id, type) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${type}/${id}/credits?api_key=${API_KEY}`
+    );
+
+    const data = await response.json();
+
+    renderCast(data.cast || []);
+  } catch (error) {
+    console.error("Cast error:", error);
+  }
+}
+function renderCast(cast) {
+  if (!castListEl) return;
+
+  castListEl.innerHTML = cast.slice(0, 10).map(actor => {
+
+    const image = actor.profile_path
+      ? IMAGE_URL + actor.profile_path
+      : "https://via.placeholder.com/300x450?text=No+Image";
+
+    return `
+      <div class="cast-card"
+           onclick="openPerson(${actor.id})">
+
+        <img src="${image}">
+
+        <h3>${actor.name}</h3>
+        <p>${actor.character}</p>
+
+      </div>
+    `;
+  }).join("");
+}
+
+function openPerson(id) {
+  window.location.href = `person.html?id=${id}`;
 }
