@@ -5,6 +5,7 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 const type = params.get("type");
 
+
 async function loadDetails() {
   try {
     const response = await fetch(
@@ -68,4 +69,10 @@ function displayDetails(data) {
 
 if (id && type) {
   loadDetails();
+}
+
+
+const input = document.querySelector(".search-input");
+if (input && query) {
+  input.value = query;
 }
