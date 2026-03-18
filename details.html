@@ -47,78 +47,31 @@
   </div>
 </header>
 
-
 <section class="details-hero">
-  <div class="overlay">
-    <div class="container">
-      <div class="poster">
+  <div class="container">
+    <div class="poster">
+      <div class="poster-img">
+        <img id="detailsPoster" src="" alt="Movie Poster" class="poster-img">
+      </div>
 
-        <!-- Poster -->
-        <div class="poster-img">
-          <img src="can this.webp" class="poster-img" alt="Movie Poster">
+      <div class="poster-info">
+        <h1 class="movie-title" id="detailsTitle">Title</h1>
+        <span class="year" id="detailsYear">2026</span>
+
+        <div class="meta" id="detailsGenres"></div>
+
+        <div class="meta-details">
+          <p><strong>Type:</strong> <span id="detailsType"></span></p>
+          <p><strong>Language:</strong> <span id="detailsLanguage"></span></p>
+          <p><strong>Rating:</strong> <span id="detailsRating"></span></p>
+          <p><strong>Status:</strong> <span id="detailsStatus"></span></p>
+          <p><strong>Extra:</strong> <span id="detailsExtra"></span></p>
         </div>
 
-        <!-- Info -->
-        <div class="poster-info">
+        <p class="tagline" id="detailsTagline"></p>
 
-          <h1 class="movie-title">
-            Can this love be translated?
-            <span class="year">2026</span>
-          </h1>
-
-          <div class="meta">
-            <span class="badge bg-secondary">Drama</span>
-            <span class="badge bg-secondary">Romance</span>
-            <span class="age">15+</span>
-          </div>
-
-          <!-- Rating -->
-          <div class="rating interactive">
-  <div class="stars-container">
-    <div class="stars" data-rating="0">
-      <span class="star" data-value="1">☆</span>
-      <span class="star" data-value="2">☆</span>
-      <span class="star" data-value="3">☆</span>
-      <span class="star" data-value="4">☆</span>
-      <span class="star" data-value="5">☆</span>
-    </div>
-    <div class="rating-value">Rate this</div>
-  </div>
-</div>
-
-          <!-- Action Icons -->
-          <div class="actions">
-            <button class="icon-btn">
-              <i class="bi bi-heart"></i>
-            </button>
-
-            <button class="icon-btn">
-              <i class="bi bi-bookmark"></i>
-            </button>
-          </div>
-
-          <p class="tagline">The most difficult language, yours.</p>
-
-          <h4>overview</h4>
-          <p class="overview">
-            Pas facile de se comprendre pour une célébrité et son interprète
-            alors qu'ils parcourent le monde pour une émission de télévision.
-          </p>
-
-          <!-- Creators -->
-          <div class="creators-list">
-            <div>
-              <strong>Hong Mi-ran</strong>
-              <p>Creator</p>
-            </div>
-            <div>
-              <strong>Hong Jeong-eun</strong>
-              <p>Creator</p>
-            </div>
-          </div>
-
-        </div>
-
+        <h4>Overview</h4>
+        <p class="overview" id="detailsOverview"></p>
       </div>
     </div>
   </div>
@@ -127,6 +80,6 @@
 
 
 
-  <script src="FAQ.js"></script>
+  <script src="details.js"></script>
 </body>
 </html>

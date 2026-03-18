@@ -84,30 +84,22 @@ async function loadPopular() {
       `https://api.themoviedb.org/3/movie/popular?api_key=${myAPIKey}`
     );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
     const data = await response.json();
-    console.log(data.results);
 
     popularTrack.innerHTML = "";
 
     data.results.forEach((item) => {
       if (!item.poster_path) return;
 
-      const title = item.title || item.name;
-      const mediaType = item.media_type;
+      const title = item.title;
+      const mediaType = "movie";
 
       const card = document.createElement("div");
       card.classList.add("card");
 
       card.innerHTML = `
         <div class="card-image">
-          <img 
-            src="https://image.tmdb.org/t/p/w500${item.poster_path}" 
-            alt="${title}"
-          >
+          <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${title}">
         </div>
         <div class="card-content">
           <a href="details.html?id=${item.id}&type=${mediaType}" class="card-title">
@@ -116,7 +108,7 @@ async function loadPopular() {
         </div>
       `;
 
-     popularTrack.appendChild(card);
+      popularTrack.appendChild(card);
     });
   } catch (error) {
     console.error("Error loading popular:", error);
@@ -124,6 +116,7 @@ async function loadPopular() {
 }
 
 loadPopular();
+
 
 
 /* ***************************************coming soon movies and tv shows carousel***************************************************************/
@@ -137,30 +130,22 @@ async function loadComingSoon() {
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${myAPIKey}`
     );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
     const data = await response.json();
-    console.log(data.results);
 
     comingSoonTrack.innerHTML = "";
 
     data.results.forEach((item) => {
       if (!item.poster_path) return;
 
-      const title = item.title || item.name;
-      const mediaType = item.media_type;
+      const title = item.title;
+      const mediaType = "movie";
 
       const card = document.createElement("div");
       card.classList.add("card");
 
       card.innerHTML = `
         <div class="card-image">
-          <img 
-            src="https://image.tmdb.org/t/p/w500${item.poster_path}" 
-            alt="${title}"
-          >
+          <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${title}">
         </div>
         <div class="card-content">
           <a href="details.html?id=${item.id}&type=${mediaType}" class="card-title">
@@ -169,7 +154,7 @@ async function loadComingSoon() {
         </div>
       `;
 
-     comingSoonTrack.appendChild(card);
+      comingSoonTrack.appendChild(card);
     });
   } catch (error) {
     console.error("Error loading coming soon:", error);
@@ -177,3 +162,4 @@ async function loadComingSoon() {
 }
 
 loadComingSoon();
+
