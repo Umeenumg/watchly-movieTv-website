@@ -48,7 +48,38 @@
 
 
    <!-- display search results Section -->
-    
+<section class="filters-section">
+  <div class="filters-top-row">
+   <select id="media-filter">
+    <option value="">All</option>
+    <option value="movie">Movies</option>
+    <option value="tv">TV Series</option>
+  </select>
+
+    <input type="number" id="year-filter" placeholder="Year">
+
+    <select id="rating-filter">
+      <option value="">All Ratings</option>
+      <option value="9">9+ rating</option>
+      <option value="8">8+ rating</option>
+      <option value="7">7+ rating</option>
+      <option value="6">6+ rating</option>
+    </select>
+
+    <select id="sort-filter">
+      <option value="">Sort</option>
+      <option value="vote_average.desc">Highest Rated</option>
+      <option value="primary_release_date.desc">Newest</option>
+    </select>
+
+    <button id="apply-filters-btn">Apply</button>
+  </div>
+
+  <div class="genres-block">
+    <div id="genres-checkboxes" class="genres-checkboxes"></div>
+  </div>
+</section>
+
  <section class="results-page">
   <h2 class="results-title">Search Results</h2>
   <div id="searchResults" class="results-list"></div>

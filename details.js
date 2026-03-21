@@ -15,6 +15,7 @@ const genresEl = document.getElementById("details-genres");
 const overviewEl = document.getElementById("details-overview");
 const infoGridEl = document.querySelector(".details-info-grid");
 
+
 async function fetchDetails() {
   try {
     if (!id || !type) {
@@ -32,6 +33,7 @@ async function fetchDetails() {
     const data = await response.json();
     
     renderDetails(data, type);
+    
    updateWatchlistButton(data, type);
 
     watchlistBtn.addEventListener("click", () => {
