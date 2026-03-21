@@ -79,25 +79,39 @@ if (query) {
   searchMovies(query);
 }
   */
+
  const API_KEY = "233d663323afc329f230f615adeaeda0";
 const IMG = "https://image.tmdb.org/t/p/w500";
 const resultsContainer = document.getElementById("searchResults");
-
 const params = new URLSearchParams(window.location.search);
 const query = params.get("query");
+let currentPage = 1;
+let totalPages = 1;
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+const pageInfo = document.getElementById("page-info");
 
-async function searchMovies(query) {
+const BASE_URL = "https://api.themoviedb.org/3";
+let allResults = [];
+
+
+async function searchMovies(query, page = 1) {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
+      `${BASE_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${page}`
     );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
     const data = await response.json();
-    displayResults(data.results);
+
+    allResults = (data.results || []).filter(
+      item => item.media_type === "movie" || item.media_type === "tv"
+    );
+
+    currentPage = data.page;
+    totalPages = data.total_pages;
+
+    displayResults(allResults);
+    updatePagination();
   } catch (error) {
     console.error("Search error:", error);
   }
@@ -160,7 +174,29 @@ function displayResults(results) {
     resultsContainer.appendChild(card);
   });
 }
+function updatePagination() {
+  pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
 
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage === totalPages;
+}
+prevBtn.addEventListener("click", () => {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get("query");
+
+  if (currentPage > 1) {
+    searchMovies(query, currentPage - 1);
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get("query");
+
+  if (currentPage < totalPages) {
+    searchMovies(query, currentPage + 1);
+  }
+});
 if (query) {
   searchMovies(query);
 }
