@@ -30,6 +30,7 @@ let totalPages = 1;
 // ----------------------------
 async function searchMovies(searchQuery, page = 1) {
   try {
+    currentMode = "search";
     const response = await fetch(
       `${BASE_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(searchQuery)}&page=${page}`
     );
@@ -126,21 +127,26 @@ function updatePagination() {
   nextBtn.disabled = currentPage === totalPages;
 }
 
-if (prevBtn) {
-  prevBtn.addEventListener("click", () => {
-    if (query && currentPage > 1) {
-      searchMovies(query, currentPage - 1);
-    }
-  });
-}
+prevBtn.addEventListener("click", () => {
+  if (currentPage <= 1) return;
 
-if (nextBtn) {
-  nextBtn.addEventListener("click", () => {
-    if (query && currentPage < totalPages) {
-      searchMovies(query, currentPage + 1);
-    }
-  });
-}
+  if (currentMode === "search") {
+    searchMovies(query, currentPage - 1);
+  } else {
+    applyDiscoverFilters(currentPage - 1);
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  if (currentPage >= totalPages) return;
+
+  if (currentMode === "search") {
+    searchMovies(query, currentPage + 1);
+  } else {
+    applyDiscoverFilters(currentPage + 1);
+  }
+});
+
 
 // ----------------------------
 // GENRES
@@ -184,63 +190,102 @@ function getSelectedGenres() {
 // ----------------------------
 // FILTERS ON SEARCH RESULTS
 // ----------------------------
-function applyFilters() {
-  if (!allResults.length) {
-    resultsContainer.innerHTML = `<p class="empty-results">Search for something first.</p>`;
-    return;
-  }
-
-  let results = [...allResults];
-
-  const media = mediaFilter ? mediaFilter.value : "";
-  const year = yearFilter ? yearFilter.value.trim() : "";
-  const rating = ratingFilter ? ratingFilter.value : "";
-  const sort = sortFilter ? sortFilter.value : "";
+async function applyFilters() {
+  const media = document.getElementById("media-filter").value;
+  const year = document.getElementById("year-filter").value.trim();
+  const rating = document.getElementById("rating-filter").value;
+  const sort = document.getElementById("sort-filter").value;
   const selectedGenres = getSelectedGenres();
 
-  // media
-  if (media) {
-    results = results.filter((item) => item.media_type === media);
+  // if no search query → apply discover filters
+  if (!query) {
+    return applyDiscoverFilters(1);
   }
 
-  // year
+  //  if there is a search query → filter local
+  let results = [...allResults];
+
+  if (media) {
+    results = results.filter(item => item.media_type === media);
+  }
+
   if (year) {
-    results = results.filter((item) =>
+    results = results.filter(item =>
       (item.release_date || item.first_air_date || "").startsWith(year)
     );
   }
 
-  // rating
   if (rating) {
-    results = results.filter(
-      (item) => (item.vote_average || 0) >= Number(rating)
-    );
+    results = results.filter(item => (item.vote_average || 0) >= Number(rating));
   }
 
-  // genres
   if (selectedGenres.length) {
-    results = results.filter((item) => {
+    results = results.filter(item => {
       const genreIds = item.genre_ids || [];
-      return selectedGenres.every((id) => genreIds.includes(id));
+      return selectedGenres.every(id => genreIds.includes(id));
     });
   }
 
-  // sort
   if (sort === "vote_average.desc") {
     results.sort((a, b) => (b.vote_average || 0) - (a.vote_average || 0));
   }
 
   if (sort === "primary_release_date.desc") {
-    results.sort(
-      (a, b) =>
-        new Date(b.release_date || b.first_air_date || 0) -
-        new Date(a.release_date || a.first_air_date || 0)
+    results.sort((a, b) =>
+      new Date(b.release_date || b.first_air_date || 0) -
+      new Date(a.release_date || a.first_air_date || 0)
     );
   }
 
   displayResults(results);
 }
 
+async function applyDiscoverFilters(page = 1) {
+  try {
+    currentMode = "discover";
+
+    const media = document.getElementById("media-filter").value || "movie";
+    const year = document.getElementById("year-filter").value.trim();
+    const rating = document.getElementById("rating-filter").value;
+    const sort = document.getElementById("sort-filter").value;
+    const selectedGenres = getSelectedGenres();
+
+    let url = `${BASE_URL}/discover/${media}?api_key=${API_KEY}&page=${page}`;
+
+    if (selectedGenres.length) {
+      url += `&with_genres=${selectedGenres.join(",")}`;
+    }
+
+    if (year) {
+      if (media === "movie") {
+        url += `&primary_release_year=${year}`;
+      } else {
+        url += `&first_air_date_year=${year}`;
+      }
+    }
+
+    if (rating) {
+      url += `&vote_average.gte=${rating}`;
+    }
+
+    if (sort) {
+      url += `&sort_by=${sort}`;
+    }
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    allResults = data.results || [];
+    currentPage = data.page;
+    totalPages = data.total_pages;
+
+    displayResults(allResults);
+    updatePagination();
+
+  } catch (error) {
+    console.error("Discover error:", error);
+  }
+}
 // ----------------------------
 // EVENTS
 // ----------------------------

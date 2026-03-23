@@ -14,7 +14,7 @@ const yearEl = document.getElementById("details-year");
 const genresEl = document.getElementById("details-genres");
 const overviewEl = document.getElementById("details-overview");
 const infoGridEl = document.querySelector(".details-info-grid");
-
+const trailerContainer = document.getElementById("trailer-container");
 
 async function fetchDetails() {
   try {
@@ -33,6 +33,7 @@ async function fetchDetails() {
     const data = await response.json();
     
     renderDetails(data, type);
+    fetchTrailer(id, type);
     
    updateWatchlistButton(data, type);
 
@@ -152,6 +153,53 @@ function showError() {
 }
 
 fetchDetails();
+/*********************fetch trailer ***************/
+async function fetchTrailer(id, type) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${type}/${id}/videos?api_key=${API_KEY}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Trailer fetch failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    renderTrailer(data.results || []);
+  } catch (error) {
+    console.error("Trailer error:", error);
+
+    if (trailerContainer) {
+      trailerContainer.innerHTML = `
+        <p class="trailer-placeholder">Could not load trailer.</p>
+      `;
+    }
+  }
+}
+
+function renderTrailer(videos) {
+  if (!trailerContainer) return;
+
+  const trailer = videos.find(
+    (video) => video.type === "Trailer" && video.site === "YouTube"
+  );
+
+  if (!trailer) {
+    trailerContainer.innerHTML = `
+      <p class="trailer-placeholder">No trailer available.</p>
+    `;
+    return;
+  }
+
+  trailerContainer.innerHTML = `
+    <iframe
+      src="https://www.youtube.com/embed/${trailer.key}"
+      title="Trailer"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  `;
+}
 
 /* *************************************** fetch similar movies and tv shows***************************/
 const similarListEl = document.getElementById("similar-list");
