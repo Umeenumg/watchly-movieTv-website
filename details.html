@@ -17,6 +17,7 @@
         <!-- Header Section -->
 <header>
   <div class="header-container">
+
     <!-- Logo -->
     <a class="logo" href="home.html">
       <span class="logo-icon">🎬</span>
@@ -24,26 +25,37 @@
     </a>
 
     <!-- Search Bar -->
-    <div class="search-wrapper">
-      <i class="bi bi-search search-icon"></i>
-      <input
-        class="search-input"
-        type="search"
-        placeholder="Search for movies, series..."
-        id="searchInput"
-      >
-    </div>
+ <div class="search-wrapper">
+  <i class="bi bi-search search-icon"></i>
 
-    <!-- Watchlist Button -->
+  <input
+    class="search-input"
+    type="search"
+    placeholder="Search for movies, series..."
+    id="searchInput"
+  >
+
+  <!-- 🔥 NEW -->
+  <div id="search-suggestions" class="search-suggestions"></div>
+</div>
+
+    <!-- Favorites -->
+    <a class="watchlist-link favorites-link" href="favorites.html">
+      <i class="bi bi-heart-fill"></i>
+      <span class="watchlist-text">Favorites</span>
+    </a>
+
+    <!-- Watchlist -->
     <a class="watchlist-link" href="watchlist.html">
       <i class="bi bi-bookmark-fill"></i>
       <span class="watchlist-text">Watchlist</span>
     </a>
 
-    <!-- Mobile Menu Button (hidden on desktop) -->
+    <!-- Mobile -->
     <button class="mobile-menu-btn" aria-label="Menu">
       <i class="bi bi-list"></i>
     </button>
+
   </div>
 </header>
 
@@ -61,12 +73,19 @@
       <div class="details-meta-top">
         <span id="details-year">2023</span>
       </div>
-
       <div id="details-genres" class="genre-list"></div>
-      <button id="watchlist-btn" class="watchlist-btn">
-        <i class="bi bi-bookmark-fill"></i>
-       Add to Watchlist
-      </button>
+     <div class="details-actions">
+  <button id="watchlist-btn" class="watchlist-btn">
+    <i class="bi bi-bookmark-fill"></i>
+    Add to Watchlist
+  </button>
+
+  <button id="favorite-btn" class="favorite-btn">
+    <i class="bi bi-heart"></i>
+    <span>Add to Favorites</span>
+  </button>
+</div>
+      
 
       <div class="details-info-grid"></div>
 

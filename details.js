@@ -39,6 +39,19 @@ async function fetchDetails() {
     fetchProviders(id, type);
     
    updateWatchlistButton(data, type);
+   
+    updateFavoriteButton(data.id);
+
+    favoriteBtn.onclick = () => {
+      toggleFavorite({
+        id: data.id,
+        title: data.title || data.name || "Unknown title",
+        poster_path: data.poster_path || "",
+        media_type: type,
+        year: (data.release_date || data.first_air_date || "").slice(0, 4),
+        rating: data.vote_average || 0
+      });
+    };
 
     watchlistBtn.addEventListener("click", () => {
       toggleWatchlist(data, type);
@@ -531,7 +544,61 @@ function renderCast(cast) {
 function openPerson(id) {
   window.location.href = `person.html?id=${id}`;
 }
+/*************favorites button ********************* */
+const favoriteBtn = document.getElementById("favorite-btn");
 
+function getFavorites() {
+  return JSON.parse(localStorage.getItem("favorites")) || [];
+}
+
+function saveFavorites(favorites) {
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+function isFavorite(id) {
+  const favorites = getFavorites();
+  return favorites.some((item) => item.id === id);
+}
+
+function updateFavoriteButton(id) {
+  if (!favoriteBtn) return;
+
+  const icon = favoriteBtn.querySelector("i");
+  const text = favoriteBtn.querySelector("span");
+
+  if (isFavorite(id)) {
+    favoriteBtn.classList.add("active");
+    if (icon) {
+      icon.className = "bi bi-heart-fill";
+    }
+    if (text) {
+      text.textContent = "Favorited";
+    }
+  } else {
+    favoriteBtn.classList.remove("active");
+    if (icon) {
+      icon.className = "bi bi-heart";
+    }
+    if (text) {
+      text.textContent = "Add to Favorites";
+    }
+  }
+}
+
+function toggleFavorite(item) {
+  let favorites = getFavorites();
+
+  const exists = favorites.some((fav) => fav.id === item.id);
+
+  if (exists) {
+    favorites = favorites.filter((fav) => fav.id !== item.id);
+  } else {
+    favorites.unshift(item);
+  }
+
+  saveFavorites(favorites);
+  updateFavoriteButton(item.id);
+}
 /**************fetch reviews***************/
 async function fetchReviews(id, type) {
   try {
