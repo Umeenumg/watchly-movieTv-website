@@ -15,6 +15,7 @@ const genresEl = document.getElementById("details-genres");
 const overviewEl = document.getElementById("details-overview");
 const infoGridEl = document.querySelector(".details-info-grid");
 const trailerContainer = document.getElementById("trailer-container");
+const reviewsListEl = document.getElementById("reviews-list");
 
 async function fetchDetails() {
   try {
@@ -34,6 +35,8 @@ async function fetchDetails() {
     
     renderDetails(data, type);
     fetchTrailer(id, type);
+    fetchReviews(id, type);
+    fetchProviders(id, type);
     
    updateWatchlistButton(data, type);
 
@@ -527,4 +530,174 @@ function renderCast(cast) {
 
 function openPerson(id) {
   window.location.href = `person.html?id=${id}`;
+}
+
+/**************fetch reviews***************/
+async function fetchReviews(id, type) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${type}/${id}/reviews?api_key=${API_KEY}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Reviews fetch failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    renderReviews(data.results || []);
+  } catch (error) {
+    console.error("Reviews error:", error);
+
+    if (reviewsListEl) {
+      reviewsListEl.innerHTML = `
+        <p class="reviews-placeholder">Could not load reviews.</p>
+      `;
+    }
+  }
+}
+function renderReviews(reviews) {
+  if (!reviewsListEl) return;
+
+  if (!reviews.length) {
+    reviewsListEl.innerHTML = `
+      <p class="reviews-placeholder">No reviews available.</p>
+    `;
+    return;
+  }
+
+  reviewsListEl.innerHTML = reviews
+    .slice(0, 3) 
+    .map((review) => {
+      const author = review.author || "Anonymous";
+      const username = review.author_details?.username || "";
+      const rating = review.author_details?.rating;
+      const avatarPath = review.author_details?.avatar_path;
+
+      const content = review.content || "";
+
+      
+      const shortContent =
+        content.length > 110 ? content.slice(0, 110) + "..." : content;
+
+    
+      let avatarHTML = "";
+
+      if (avatarPath && avatarPath.startsWith("/")) {
+        avatarHTML = `
+          <img 
+            src="https://image.tmdb.org/t/p/w45${avatarPath}" 
+            class="review-avatar"
+          >
+        `;
+      } else {
+        avatarHTML = `
+          <div class="review-avatar-fallback">
+            ${author.charAt(0).toUpperCase()}
+          </div>
+        `;
+      }
+
+      return `
+        <article class="review-mini-card">
+
+          <div class="review-mini-header">
+
+            <div class="review-user">
+              ${avatarHTML}
+
+              <div class="review-user-info">
+                <p class="review-mini-author">${escapeHtml(author)}</p>
+                <span class="review-mini-username">@${escapeHtml(username)}</span>
+              </div>
+            </div>
+
+            <span class="review-mini-rating">
+              ${rating ? `★ ${rating}/10` : ""}
+            </span>
+
+          </div>
+
+          <p class="review-mini-text">
+            ${escapeHtml(shortContent)}
+          </p>
+
+          ${
+            review.url
+              ? `<a class="review-mini-link" href="${review.url}" target="_blank">
+                   Read full
+                 </a>`
+              : ""
+          }
+
+        </article>
+      `;
+    })
+    .join("");
+}
+function toggleReview(index) {
+  const contentEl = document.getElementById(`review-content-${index}`);
+  const buttonEl = contentEl?.nextElementSibling;
+
+  if (!contentEl || !buttonEl) return;
+
+  const isExpanded = contentEl.dataset.expanded === "true";
+  const fullText = contentEl.dataset.full;
+  const shortText = contentEl.dataset.short;
+
+  if (isExpanded) {
+    contentEl.innerHTML = shortText;
+    contentEl.dataset.expanded = "false";
+    buttonEl.textContent = "Read more";
+  } else {
+    contentEl.innerHTML = fullText;
+    contentEl.dataset.expanded = "true";
+    buttonEl.textContent = "Show less";
+  }
+}
+function escapeHtml(text) {
+  return text
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+/********fetch providers *************************** */
+async function fetchProviders(id, type) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${type}/${id}/watch/providers?api_key=${API_KEY}`
+    );
+
+    const data = await response.json();
+
+    renderProviders(data.results || {});
+  } catch (error) {
+    console.error("Providers error:", error);
+  }
+}
+function renderProviders(data) {
+  const container = document.getElementById("providers-container");
+  if (!container) return;
+
+  const country = "MA";
+
+  let providers = data[country]?.flatrate;
+
+  //  fallback
+  if (!providers || providers.length === 0) {
+    providers = data["US"]?.flatrate || [];
+  }
+
+  if (!providers.length) {
+    container.innerHTML = `<p class="providers-placeholder">Not available.</p>`;
+    return;
+  }
+
+  container.innerHTML = providers.map(p => `
+    <div class="provider-card">
+      <img src="https://image.tmdb.org/t/p/w45${p.logo_path}">
+      <span>${p.provider_name}</span>
+    </div>
+  `).join("");
 }
