@@ -1,6 +1,24 @@
 
  const myAPIKey = "233d663323afc329f230f615adeaeda0";
+function renderSkeleton(container, count = 6) {
+  if (!container) return;
 
+  container.innerHTML = "";
+
+  for (let i = 0; i < count; i++) {
+    const card = document.createElement("div");
+    card.className = "card skeleton-card";
+
+    card.innerHTML = `
+      <div class="skeleton-image"></div>
+      <div class="skeleton-content">
+        <div class="skeleton-title"></div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  }
+}
 
 // function  to fetch (search ) movie/tv show  details from API
 const searchInput = document.getElementById("searchInput");
@@ -24,7 +42,6 @@ if (searchInput) {
 
 
 const trendingTrack = document.getElementById("trendingTrack");
-
 async function loadTrending() {
   try {
     const response = await fetch(
@@ -36,7 +53,6 @@ async function loadTrending() {
     }
 
     const data = await response.json();
-    console.log(data.results);
 
     trendingTrack.innerHTML = "";
 
@@ -48,6 +64,7 @@ async function loadTrending() {
 
       const card = document.createElement("div");
       card.classList.add("card");
+      card.style.cursor = "pointer";
 
       card.innerHTML = `
         <div class="card-image">
@@ -57,11 +74,13 @@ async function loadTrending() {
           >
         </div>
         <div class="card-content">
-          <a href="details.html?id=${item.id}&type=${mediaType}" class="card-title">
-            ${title}
-          </a>
+          <h3 class="card-title">${title}</h3>
         </div>
       `;
+
+      card.addEventListener("click", () => {
+        window.location.href = `details.html?id=${item.id}&type=${mediaType}`;
+      });
 
       trendingTrack.appendChild(card);
     });
@@ -69,6 +88,7 @@ async function loadTrending() {
     console.error("Error loading trending:", error);
   }
 }
+
 
 loadTrending();
 
@@ -96,17 +116,20 @@ async function loadPopular() {
 
       const card = document.createElement("div");
       card.classList.add("card");
+      card.style.cursor = "pointer";
 
       card.innerHTML = `
         <div class="card-image">
           <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${title}">
         </div>
         <div class="card-content">
-          <a href="details.html?id=${item.id}&type=${mediaType}" class="card-title">
-            ${title}
-          </a>
+          <h3 class="card-title">${title}</h3>
         </div>
       `;
+
+      card.addEventListener("click", () => {
+        window.location.href = `details.html?id=${item.id}&type=${mediaType}`;
+      });
 
       popularTrack.appendChild(card);
     });
@@ -142,17 +165,20 @@ async function loadComingSoon() {
 
       const card = document.createElement("div");
       card.classList.add("card");
+      card.style.cursor = "pointer";
 
       card.innerHTML = `
         <div class="card-image">
           <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${title}">
         </div>
         <div class="card-content">
-          <a href="details.html?id=${item.id}&type=${mediaType}" class="card-title">
-            ${title}
-          </a>
+          <h3 class="card-title">${title}</h3>
         </div>
       `;
+
+      card.addEventListener("click", () => {
+        window.location.href = `details.html?id=${item.id}&type=${mediaType}`;
+      });
 
       comingSoonTrack.appendChild(card);
     });
@@ -160,8 +186,8 @@ async function loadComingSoon() {
     console.error("Error loading coming soon:", error);
   }
 }
-
 loadComingSoon();
+/*************************Recently viewed************************* */
 
 const recentlyViewedList = document.getElementById("recently-viewed-list");
 const POSTER_URL = "https://image.tmdb.org/t/p/w500";

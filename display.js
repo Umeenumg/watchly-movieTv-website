@@ -38,7 +38,8 @@ async function searchMovies(searchQuery, page = 1) {
     const data = await response.json();
 
     allResults = (data.results || []).filter(
-      (item) => item.media_type === "movie" || item.media_type === "tv"
+      (item) => item.media_type === "movie" || item.media_type === "tv" ||
+        item.media_type === "person"
     );
 
     currentPage = data.page || 1;
@@ -60,11 +61,17 @@ function displayResults(results) {
 
   resultsContainer.innerHTML = "";
 
-  const filteredResults = results.filter(
-    (item) =>
-      (item.media_type === "movie" || item.media_type === "tv") &&
-      item.poster_path
-  );
+  const filteredResults = results.filter((item) => {
+    if (item.media_type === "movie" || item.media_type === "tv") {
+      return item.poster_path;
+    }
+
+    if (item.media_type === "person") {
+      return item.profile_path;
+    }
+
+    return false;
+  });
 
   if (filteredResults.length === 0) {
     resultsContainer.innerHTML = `<p class="empty-results">No results found.</p>`;
@@ -72,50 +79,97 @@ function displayResults(results) {
   }
 
   filteredResults.forEach((item) => {
-    const title = item.title || item.name || "Unknown title";
-    const type = item.media_type === "movie" ? "Movie" : "TV Series";
-    const date = item.release_date || item.first_air_date || "";
-    const year = date ? date.split("-")[0] : "N/A";
-    const rating = item.vote_average ? item.vote_average.toFixed(1) : "N/A";
-
     const card = document.createElement("article");
     card.className = "search-card";
 
-    card.innerHTML = `
-      <img 
-        src="${IMG}${item.poster_path}" 
-        alt="${title}" 
-        class="search-card-poster"
-      >
+    if (item.media_type === "person") {
+      const name = item.name || "Unknown actor";
+      const profile = item.profile_path
+        ? `${IMG}${item.profile_path}`
+        : "https://via.placeholder.com/500x750?text=No+Image";
 
-      <div class="search-card-info">
-        <a 
-          href="details.html?id=${item.id}&type=${item.media_type}" 
-          class="search-card-title"
+      const knownFor = (item.known_for || [])
+        .map((work) => work.title || work.name)
+        .filter(Boolean)
+        .slice(0, 3)
+        .join(", ");
+
+      card.innerHTML = `
+        <img 
+          src="${profile}" 
+          alt="${name}" 
+          class="search-card-poster"
+          onerror="this.src='https://via.placeholder.com/500x750?text=No+Image'"
         >
-          ${title}
-        </a>
 
-        <div class="search-card-meta">
-          ${type} • ${year} • ⭐ ${rating}
+        <div class="search-card-info">
+          <a 
+            href="person.html?id=${item.id}" 
+            class="search-card-title"
+          >
+            ${name}
+          </a>
+
+          <div class="search-card-meta">
+            Actor / Cast
+          </div>
+
+          <p class="search-card-overview">
+            ${knownFor ? `Known for: ${knownFor}` : "No known titles available."}
+          </p>
         </div>
+      `;
 
-        <p class="search-card-overview">
-          ${item.overview || "No overview available."}
-        </p>
-      </div>
-    `;
+      card.addEventListener("click", (e) => {
+        if (e.target.tagName.toLowerCase() !== "a") {
+          window.location.href = `person.html?id=${item.id}`;
+        }
+      });
+    } else {
+      const title = item.title || item.name || "Unknown title";
+      const type = item.media_type === "movie" ? "Movie" : "TV Series";
+      const date = item.release_date || item.first_air_date || "";
+      const year = date ? date.split("-")[0] : "N/A";
+      const poster = item.poster_path
+        ? `${IMG}${item.poster_path}`
+        : "https://via.placeholder.com/500x750?text=No+Image";
 
-    card.addEventListener("click", (e) => {
-      if (e.target.tagName.toLowerCase() !== "a") {
-        window.location.href = `details.html?id=${item.id}&type=${item.media_type}`;
-      }
-    });
+      card.innerHTML = `
+        <img 
+          src="${poster}" 
+          alt="${title}" 
+          class="search-card-poster"
+          onerror="this.src='https://via.placeholder.com/500x750?text=No+Image'"
+        >
+
+        <div class="search-card-info">
+          <a 
+            href="details.html?id=${item.id}&type=${item.media_type}" 
+            class="search-card-title"
+          >
+            ${title}
+          </a>
+
+          <div class="search-card-meta">
+            ${type} • ${year} • ⭐ ${item.vote_average ? item.vote_average.toFixed(1) : "N/A"}
+          </div>
+
+          <p class="search-card-overview">
+            ${item.overview || "No overview available."}
+          </p>
+        </div>
+      `;
+
+      card.addEventListener("click", (e) => {
+        if (e.target.tagName.toLowerCase() !== "a") {
+          window.location.href = `details.html?id=${item.id}&type=${item.media_type}`;
+        }
+      });
+    }
 
     resultsContainer.appendChild(card);
   });
 }
-
 // ----------------------------
 // PAGINATION
 // ----------------------------

@@ -18,6 +18,7 @@ const trailerContainer = document.getElementById("trailer-container");
 const reviewsListEl = document.getElementById("reviews-list");
 
 async function fetchDetails() {
+  
   try {
     if (!id || !type) {
       throw new Error("Missing id or type in URL");
@@ -801,3 +802,4 @@ function addToRecentlyViewed(item) {
 
   saveRecentlyViewed(items);
 }
+
