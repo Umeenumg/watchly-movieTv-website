@@ -60,6 +60,14 @@ async function fetchDetails() {
   // important to save to history after rendering details, so we have the title and genres for better recommendations
   saveToHistory(data, type);
   fetchRecommended();
+  addToRecentlyViewed({
+  id: data.id,
+  title: data.title || data.name || "Unknown title",
+  poster_path: data.poster_path || "",
+  media_type: type,
+  year: (data.release_date || data.first_air_date || "").slice(0, 4),
+  rating: data.vote_average || 0
+});
   
 } catch (error) {
     console.error("Error fetching details:", error);
@@ -767,4 +775,29 @@ function renderProviders(data) {
       <span>${p.provider_name}</span>
     </div>
   `).join("");
+}
+/********Recently viewd *************** */
+function getRecentlyViewed() {
+  return JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+}
+
+function saveRecentlyViewed(items) {
+  localStorage.setItem("recentlyViewed", JSON.stringify(items));
+}
+
+function addToRecentlyViewed(item) {
+  let items = getRecentlyViewed();
+
+  // نحيد القديم إلا كان نفس item
+  items = items.filter(
+    (existing) => !(existing.id === item.id && existing.media_type === item.media_type)
+  );
+
+  // نزيد الجديد فاللول
+  items.unshift(item);
+
+  // نحتافظو غير بآخر 10
+  items = items.slice(0, 10);
+
+  saveRecentlyViewed(items);
 }

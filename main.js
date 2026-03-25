@@ -163,3 +163,64 @@ async function loadComingSoon() {
 
 loadComingSoon();
 
+const recentlyViewedList = document.getElementById("recently-viewed-list");
+const POSTER_URL = "https://image.tmdb.org/t/p/w500";
+
+function getRecentlyViewed() {
+  return JSON.parse(localStorage.getItem("recentlyViewed")) || [];
+}
+
+function renderRecentlyViewed() {
+  if (!recentlyViewedList) return;
+
+  const items = getRecentlyViewed();
+  const recentSection = document.querySelector(".recent-section");
+
+  if (!items.length) {
+    if (recentSection) {
+      recentSection.style.display = "none";
+    }
+    return;
+  }
+
+  if (recentSection) {
+    recentSection.style.display = "block";
+  }
+
+  recentlyViewedList.innerHTML = items
+    .slice(0, 6)
+    .map((item) => {
+      const poster = item.poster_path
+        ? `${POSTER_URL}${item.poster_path}`
+        : "https://via.placeholder.com/500x750?text=No+Image";
+
+      const typeLabel = item.media_type === "tv" ? "TV Series" : "Movie";
+      const year = item.year || "N/A";
+      const rating = item.rating ? item.rating.toFixed(1) : "N/A";
+
+      return `
+        <article class="recent-card" onclick="openRecentDetails(${item.id}, '${item.media_type}')">
+          <img src="${poster}" alt="${item.title}">
+
+          <div class="recent-card-overlay">
+            <div class="recent-card-body">
+              <h3>${item.title}</h3>
+              <div class="recent-card-meta">
+                ${typeLabel} • ${year} • ★ ${rating}
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+
+}
+
+function openRecentDetails(id, type) {
+  window.location.href = `details.html?id=${id}&type=${type}`;
+}
+
+renderRecentlyViewed();
+
+
