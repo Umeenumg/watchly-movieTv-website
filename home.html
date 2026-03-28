@@ -18,33 +18,39 @@
      <!-- Header Section -->
 <header>
   <div class="header-container">
+
     <!-- Logo -->
-    <a class="logo" href="home.html">
-      <span class="logo-icon">🎬</span>
-      <span class="logo-text">EmyMovies</span>
-    </a>
+   <a class="logo" href="home.html">
+  <i class="bi bi-play-circle-fill"></i>
+  <span class="logo-text">Watchly</span>
+</a>
 
     <!-- Search Bar -->
     <div class="search-wrapper">
       <i class="bi bi-search search-icon"></i>
+
       <input
         class="search-input"
         type="search"
         placeholder="Search for movies, series..."
         id="searchInput"
       >
+
+      <div id="search-suggestions" class="search-suggestions"></div>
     </div>
 
-    <!-- Watchlist Button -->
+    <!-- Favorites -->
+    <a class="watchlist-link favorites-link" href="favorites.html">
+      <i class="bi bi-heart-fill"></i>
+      <span class="watchlist-text">Favorites</span>
+    </a>
+
+    <!-- Watchlist -->
     <a class="watchlist-link" href="watchlist.html">
       <i class="bi bi-bookmark-fill"></i>
       <span class="watchlist-text">Watchlist</span>
     </a>
 
-    <!-- Mobile Menu Button (hidden on desktop) -->
-    <button class="mobile-menu-btn" aria-label="Menu">
-      <i class="bi bi-list"></i>
-    </button>
   </div>
 </header>
 
@@ -55,45 +61,47 @@
 
   <div class="stage">
     <div class="p p1">
-      <img src="http://www.impawards.com/2025/posters/sinners_xlg.jpg" alt="Sinners"
-           onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#3d0c08,#1a0400)'">
+     
+    <img src="assets/sinners.webp" alt="Sinners"
+           onerror=" this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#3d0c08,#1a0400)'">
       <div class="pov"></div><div class="shine"></div>
     </div>
     <div class="p p2">
-      <img src="http://www.impawards.com/2025/posters/war_machine_xlg.jpg" alt="War Machine"
+      <img src="assets/avatar.webp" alt="Avatar"
            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#1a2a4a,#040d18)'">
       <div class="pov"></div><div class="shine"></div>
     </div>
     <div class="p p3">
-      <img src="http://www.impawards.com/2025/posters/shelter_xlg.jpg" alt="Shelter"
+      <img src="assets/strangerthings.jpg" alt="Stranger things"
            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#1c2233,#06080e)'">
       <div class="pov"></div><div class="shine"></div>
     </div>
     <div class="p p4">
-      <img src="http://www.impawards.com/intl/uk/2025/posters/hamnet_xlg.jpg" alt="Hamnet"
+      <img src="assets/hamnet.webp" alt="Hamnet"
            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#2a1e0a,#080604)'">
       <div class="pov"></div><div class="shine"></div>
     </div>
     <div class="p p5">
-      <img src="http://www.impawards.com/2025/posters/zootopia_two_xlg.jpg" alt="Zootopia 2"
+      <img src="assets/zootopia2.jpg" alt="Zootopia 2"
            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#3a1a38,#0d050c)'">
       <div class="pov"></div><div class="shine"></div>
     </div>
     <div class="p p6">
-      <img src="http://www.impawards.com/2025/posters/the_bluff_xlg.jpg" alt="The Bluff"
+      <img src="assets/theBluff.webp" alt="The Bluff"
            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#143020,#04100a)'">
       <div class="pov"></div><div class="shine"></div>
     </div>
     <div class="p p7">
-      <img src="http://www.impawards.com/2025/posters/moana_two_xlg.jpg" alt="Moana 2"
+      <img src="assets/can-this-love-be-tranclated.webp" alt="Can this love be translated "
            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#083060,#020810)'">
       <div class="pov"></div><div class="shine"></div>
     </div>
     <div class="p p8">
-      <img src="http://www.impawards.com/2024/posters/one_piece_xlg.jpg" alt="One Piece"
+      <img src="assets/onePiece.webp" alt="One Piece"
            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(160deg,#0d3320,#020a05)'">
       <div class="pov"></div><div class="shine"></div>
     </div>
+    
   </div>
 
   <div class="o1"></div><div class="o2"></div><div class="o3"></div>
@@ -102,12 +110,7 @@
   <div class="ctl"></div><div class="ctr"></div><div class="cbl"></div><div class="cbr"></div>
 
   <div class="cnt">
-    <div class="badge">
-      <div class="dot"></div>
-      <span class="bs">Now Streaming</span>
-      <div class="bsep"></div>
-      <span class="bs">10,000+ Titles</span>
-    </div>
+  
 
     <div class="ttl glitch">
       <div class="tw">Discover Movies</div>
@@ -125,7 +128,10 @@
 
     <div class="btns">
       <div class="bp">&#9654;&nbsp; Explore Now</div>
-      <div class="bg">+ Watchlist</div>
+      <div class="bg"> <a  href="watchlist.html">
+      <i class="bi bi-bookmark-fill"></i>
+      Watchlist
+    </a></div>
     </div>
 
     <div class="stats">
@@ -188,52 +194,71 @@
   <h1 class="faq-title">Frequently Asked Questions</h1>
   
   <div class="faq-item">
-    <div class="faq-question">What is Emey Movies?</div>
+    <div class="faq-question">What is Watchly?</div>
     <div class="faq-answer">
-      Emey Movies is a movie discovery platform that allows users to explore trending, popular, and newly released movies. 
-      The website helps users search for movies, view detailed information, and build a personal list of favorite titles.
+     Watchly is a platform to discover movies, TV series, actors, and where to watch them.
     </div>
   </div>
   
   <div class="faq-item">
-    <div class="faq-question">How does the movie search work?</div>
+    <div class="faq-question"> Where does the data come from?</div>
     <div class="faq-answer">
-      The search feature allows users to find movies by title. Results are fetched in real time using a public movie API and displayed with posters, ratings, and release dates.
+     All data is provided by The Movie Database (TMDB) API.
     </div>
   </div>
   
   <div class="faq-item">
-    <div class="faq-question">Do I need an account to use the website?</div>
+    <div class="faq-question">Can I save movies to watch later?</div>
     <div class="faq-answer">
-      No account is required. Emey Movies is designed to be accessible without sign-up. Users can browse movies and add favorites without creating a profile.
+    Yes, you can add movies and series to your favorites or watchlist and access them anytime.
     </div>
   </div>
   
   <div class="faq-item">
-    <div class="faq-question">How are favorite movies saved?</div>
+    <div class="faq-question">Can I search for actors and Tv shows ?</div>
     <div class="faq-answer">
-      Favorite movies are saved locally in your browser using local storage. This means your favorites remain available on the same device without the need for an account or login.
+     Yes, you can search for movies, TV series, and actors to explore detailed information about each.
     </div>
   </div>
   
   <div class="faq-item">
-    <div class="faq-question">What technologies are used to build this website?</div>
+    <div class="faq-question"> Can I watch movies directly?</div>
     <div class="faq-answer">
-      Emey Movies is built using HTML, CSS, Bootstrap, and JavaScript. Movie data is retrieved from an external movie database API to ensure up-to-date content.
+     No, we only provide information and links to official platforms.
     </div>
   </div>
 </div>
 
-
    <!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <div class="footer-top">
+    <a class="logo" href="home.html">
+      <i class="bi bi-play-circle-fill"></i>
+      <span class="logo-text">Watchly</span>
+    </a>
+    </div>
+
+    <div class="footer-links">
+      <a href="home.html">Home</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="watchlist.html">Watchlist</a>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Powered by TMDB API</p>
+      <p>© 2026 EmyMovies</p>
+    </div>
+
+  </div>
+</footer>
  
 
      <!-- scripts -->
-<script src="FAQ.js"></script>
-
-<script src="main.js"></script>
-<script src="search.js"></script>
-<script src="details.js"></script>
+<script src="js/FAQ.js"></script>
+<script src="js/main.js"></script>
+<script src="js/search.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -20,24 +20,23 @@
 
     <!-- Logo -->
     <a class="logo" href="home.html">
-      <span class="logo-icon">🎬</span>
-      <span class="logo-text">EmyMovies</span>
-    </a>
+  <i class="bi bi-play-circle-fill"></i>
+  <span class="logo-text">Watchly</span>
+</a>
 
     <!-- Search Bar -->
- <div class="search-wrapper">
-  <i class="bi bi-search search-icon"></i>
+    <div class="search-wrapper">
+      <i class="bi bi-search search-icon"></i>
 
-  <input
-    class="search-input"
-    type="search"
-    placeholder="Search for movies, series..."
-    id="searchInput"
-  >
+      <input
+        class="search-input"
+        type="search"
+        placeholder="Search for movies, series..."
+        id="searchInput"
+      >
 
-  <!-- 🔥 NEW -->
-  <div id="search-suggestions" class="search-suggestions"></div>
-</div>
+      <div id="search-suggestions" class="search-suggestions"></div>
+    </div>
 
     <!-- Favorites -->
     <a class="watchlist-link favorites-link" href="favorites.html">
@@ -50,11 +49,6 @@
       <i class="bi bi-bookmark-fill"></i>
       <span class="watchlist-text">Watchlist</span>
     </a>
-
-    <!-- Mobile -->
-    <button class="mobile-menu-btn" aria-label="Menu">
-      <i class="bi bi-list"></i>
-    </button>
 
   </div>
 </header>
@@ -102,6 +96,7 @@
 </section>
 <section class="media-reviews-section">
   <div class="media-column">
+
     <div class="trailer-box">
       <h2>Trailer</h2>
       <div id="trailer-container" class="trailer-container">
@@ -112,9 +107,11 @@
     <div class="providers-box">
       <h2>Where to watch</h2>
       <div id="providers-container" class="providers-container">
-        <p class="providers-placeholder">Providers coming soon...</p>
+        <p class="providers-placeholder">Loading providers...</p>
       </div>
+      <div id="watch-now-wrapper"></div>
     </div>
+
   </div>
 
   <div class="reviews-column">
@@ -135,11 +132,37 @@
 </section>
 
 
+/*Footer*/
+ 
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <div class="footer-top">
+    <a class="logo" href="home.html">
+      <i class="bi bi-play-circle-fill"></i>
+      <span class="logo-text">Watchly</span>
+    </a>
+    </div>
+
+    <div class="footer-links">
+      <a href="home.html">Home</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="watchlist.html">Watchlist</a>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Powered by TMDB API</p>
+      <p>© 2026 EmyMovies</p>
+    </div>
+
+  </div>
+</footer>
 
 
 
 
-  <script src="details.js"></script>
-  <script src="search.js"></script>
+
+  <script src="js/details.js"></script>
+  <script src="js/search.js"></script>
 </body>
 </html>
